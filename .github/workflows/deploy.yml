@@ -30,19 +30,10 @@ jobs:
       - name: Install
         run: npm ci
 
-      - name: Configure AWS (OIDC)
-        if: ${{ secrets.AWS_DEPLOY_ROLE_ARN != '' }}
+      - name: Configure AWS
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
-          aws-region: us-east-1
-
-      - name: Configure AWS (access keys)
-        if: ${{ secrets.AWS_DEPLOY_ROLE_ARN == '' }}
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: arn:aws:iam::518710148615:role/capacity-planner-github-deploy
           aws-region: us-east-1
 
       - name: Deploy

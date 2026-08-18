@@ -32,11 +32,11 @@ aws cloudformation deploy \
   --capabilities CAPABILITY_NAMED_IAM
 ```
 
-Then in the GitHub repo: **Settings → Secrets and variables → Actions**
+The workflow assumes `arn:aws:iam::518710148615:role/capacity-planner-github-deploy` (OIDC). That ARN is in `.github/workflows/deploy.yml`, not a GitHub secret.
 
-- `AWS_DEPLOY_ROLE_ARN` = output `DeployRoleArn` from `capacity-planner-github`
+Do not commit `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY` into git.
 
-After that, every merge to `master` deploys.
+After the workflow is on `master`/`main`, every merge deploys.
 
 ## Manual deploy
 
