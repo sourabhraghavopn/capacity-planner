@@ -2,12 +2,10 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: IAM role for GitHub Actions to deploy Capacity Planner to S3 + CloudFront
 
 Parameters:
-  GitHubOrg:
+  GitHubSubPrefix:
     Type: String
-    Default: sourabhraghavopn
-  GitHubRepo:
-    Type: String
-    Default: capacity-planner
+    Default: repo:sourabhraghavopn@95341610/capacity-planner@1337065515
+    Description: GitHub Actions OIDC sub prefix (owner@id/repo@id)
 
 Resources:
   GitHubOidcProvider:
@@ -36,8 +34,8 @@ Resources:
                 token.actions.githubusercontent.com:aud: sts.amazonaws.com
               StringLike:
                 token.actions.githubusercontent.com:sub:
-                  - !Sub repo:${GitHubOrg}/${GitHubRepo}:ref:refs/heads/master
-                  - !Sub repo:${GitHubOrg}/${GitHubRepo}:ref:refs/heads/main
+                  - !Sub '${GitHubSubPrefix}:ref:refs/heads/master'
+                  - !Sub '${GitHubSubPrefix}:ref:refs/heads/main'
       Policies:
         - PolicyName: capacity-planner-deploy
           PolicyDocument:
