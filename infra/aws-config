@@ -1,0 +1,7 @@
+[profile capacity-planner]
+sso_start_url = https://omise.awsapps.com/start
+sso_region = ap-southeast-1
+sso_account_id = 518710148615
+sso_role_name = PowerUserWithIAMFullAccess
+region = us-east-1
+output = json
